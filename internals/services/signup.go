@@ -2,10 +2,11 @@ package services
 
 import (
 	"context"
+	"golang-movie-reservation/database"
 	"net/http"
-	"office-expense-management-backend/database"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -26,7 +27,12 @@ func Signup(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"errorProcessingRequest": err})
 	}
 
+	myuuid := uuid.New()
+
 	// your query to the database
-	row := pool.QueryRow(context.Background(), "INSERT INTO ** VALUES ($1, $2)", req.Username, hashsedPassword)
+	_, err = pool.Exec(context.Background(), "INSERT INTO users(id, username, pass, role) VALUES ($1, $2, $3, $4)", myuuid, req.Username, hashsedPassword, "client")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"errorProcessingRequest": err})
+	}
 
 }
