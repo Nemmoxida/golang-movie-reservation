@@ -22,6 +22,7 @@ func VerifyToken(tokenString string) (*Claims, error) {
 		return nil, fmt.Errorf("JWT_SECRET is not set")
 	}
 
+	// seperate actual token from authorization header
 	parts := strings.Fields(tokenString)
 	if len(parts) == 2 && strings.EqualFold(parts[0], "Bearer") {
 		tokenString = parts[1]

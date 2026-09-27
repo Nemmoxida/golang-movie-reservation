@@ -16,10 +16,10 @@ func Router(adminRoute *services.Admin, movieRoute *services.Global, clientRoute
 	// admin only
 	r.POST("/addmovie", middleware.AuthHandlerAdmin(), adminRoute.AddMovie)
 	r.PUT("/editmovie", middleware.AuthHandlerAdmin(), adminRoute.EditMovie)
-	r.DELETE("/deletemovie", middleware.AuthHandlerAdmin(), adminRoute.DeleteMovie)
+	r.DELETE("/deletemovie/:id", middleware.AuthHandlerAdmin(), adminRoute.DeleteMovie)
 	r.POST("/addschedule", middleware.AuthHandlerAdmin(), adminRoute.AddSchedule)
 	r.PUT("/editschedule", middleware.AuthHandlerAdmin(), adminRoute.EditSchedule)
-	r.DELETE("/deleteschedule", middleware.AuthHandlerAdmin(), adminRoute.DeleteSchedule)
+	r.DELETE("/deleteschedule/:id", middleware.AuthHandlerAdmin(), adminRoute.DeleteSchedule)
 
 	// both admin and client
 	r.GET("/getmovie", movieRoute.GetMovie)
