@@ -222,7 +222,7 @@ Content-Type: application/json
 
 ## Notes and Caveats
 
-- The current project is a backend-only API; there is no frontend included.
+- The current project is a backend-only API there is yet a frontend included.
 - Authentication and authorization are implemented in middleware and JWT claims.
 - Payment creation uses Midtrans Snap and returns a redirect token for frontend payment flow.
 
