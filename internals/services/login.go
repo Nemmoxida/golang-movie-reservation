@@ -49,8 +49,9 @@ func Login(c *gin.Context) {
 
 	defer pool.Close()
 
-	row := pool.QueryRow(context.Background(), "SELECT username, password, role FROM users WHERE username = $1", req.Username)
+	row := pool.QueryRow(context.Background(), "SELECT username, pass, role FROM users WHERE username = $1", req.Username)
 
+	fmt.Println(req.Username)
 	var username, password, role string
 
 	if err := row.Scan(&username, &password, &role); err != nil {
@@ -69,5 +70,5 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"token": token})
+	c.JSON(http.StatusAccepted, gin.H{"status": "success", "token": token})
 }

@@ -35,4 +35,5 @@ func Signup(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"errorProcessingRequest": err})
 	}
 
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "signup complete"})
 }

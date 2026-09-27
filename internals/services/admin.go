@@ -20,7 +20,7 @@ func NewAdmin() *Admin {
 type AddMovieRequest struct {
 	Name           string    `json:"name"`
 	Creator        string    `json:"creator"`
-	Genre          string    `json:"genre"`
+	Genre          []string  `json:"genre"`
 	ReleaseDate    time.Time `json:"release_date"`
 	DescMovie      *string   `json:"desc_movie"`
 	PosterImageURL *string   `json:"poster_image_url"`
@@ -43,7 +43,8 @@ func (d *Admin) AddMovie(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+			"message": "error finding request body",
+			"error":   err.Error(),
 		})
 		return
 	}

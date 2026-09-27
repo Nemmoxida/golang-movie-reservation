@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"golang-movie-reservation/pkg"
 	"net/http"
 
@@ -21,6 +22,8 @@ func AuthHandlerAdmin() gin.HandlerFunc {
 			return
 
 		}
+
+		fmt.Println(claims.Role)
 
 		if claims.Role != "admin" {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "unauthorize", "message": "admin only route"})
